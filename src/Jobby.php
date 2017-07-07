@@ -155,6 +155,9 @@ class Jobby
         $scheduleChecker = new ScheduleChecker();
         foreach ($this->jobs as $job => $config) {
             if (!$scheduleChecker->isDue($config['schedule'])) {
+				if($config['debug']) {
+					echo sprintf("\nJob '%s' is not due.",$job);
+				}
                 continue;
             }
             if ($isUnix) {
