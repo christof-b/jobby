@@ -175,7 +175,7 @@ class Jobby
         $binary = $this->getPhpBinary();
 
         $output = $config['debug'] ? 'debug.log' : '/dev/null';
-        exec("$binary $command 1> $output 2>&1 &");
+        system("$binary $command 1> $output 2>&1 &");
     }
 
     // @codeCoverageIgnoreStart
