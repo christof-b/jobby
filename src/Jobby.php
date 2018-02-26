@@ -138,7 +138,7 @@ class Jobby
         }
 
         $config = array_merge($this->config, $config);
-        $this->jobs[$job] = $config;
+        $this->jobs[] = [$job, $config];
     }
 
     /**
@@ -153,7 +153,8 @@ class Jobby
         }
 
         $scheduleChecker = new ScheduleChecker();
-        foreach ($this->jobs as $job => $config) {
+        foreach ($this->jobs as $jobConfig) {
+            list($job, $config) = $jobConfig;
             if (!$scheduleChecker->isDue($config['schedule'])) {
 				if($config['debug']) {
 					echo sprintf("\nJob '%s' is not due.",$job);
